@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-api
+  template:
+    metadata:
+      labels:
+        app: book-api
+    spec:
+      containers:
+      - name: book-api
+        image: gcr.io/flash-ward-455802-m3/book-api
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGO_URI
+          value: "mongodb://mongo:27017/libraryDb"
